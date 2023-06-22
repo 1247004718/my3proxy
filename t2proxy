@@ -1,0 +1,19 @@
+#!/bin/bash
+FILENAME=$1.proxy
+if [ ! -n "$1" ] ;then
+    echo "Usage:$0 FILENAME" && exit 1;
+fi
+sum=1
+> FILENAME=$1.proxy
+while read line
+do
+
+  echo "allow *" >> $FILENAME
+  temp=`echo $line|sed 's#:# #'`
+  echo parent  1000 socks5 $temp >> $FILENAME
+  echo socks -p$((10000+$sum)) >> $FILENAME
+  echo flush >> $FILENAME
+  sum=$(($sum + 1))
+
+done < $1
+echo "总共转换代理数量为: $(($sum - 1)),已保存至 $FILENAME !"
