@@ -30,7 +30,7 @@ After=syslog.target network.target
 
 [Service]
 Type=forking
-ExecStart=/usr/bin/3proxy /etc/3proxy.cfg
+ExecStart=/usr/bin/3proxy /etc/3proxy/3proxy.cfg
 
 [Install]
 WantedBy=multi-user.target
