@@ -20,7 +20,9 @@ fi
 
 wget -cO  /tmp/3proxy.tar.gz  https://raw.githubusercontent.com/1247004718/my3proxy/master/3proxy.tar.gz --no-check-certificate
 ifcmd
-
+wget -cO  /usr/bin/t2proxy  https://raw.githubusercontent.com/1247004718/my3proxy/master/t2proxy --no-check-certificate
+ifcmd
+chmod +x /usr/bin/t2proxy
 tar -xf /tmp/3proxy.tar.gz -C /
 
 echo "
@@ -34,7 +36,10 @@ ExecStart=/usr/bin/3proxy /etc/3proxy/3proxy.cfg
 
 [Install]
 WantedBy=multi-user.target
-" >/lib/systemd/system/3proxy.service
+" >/lib/systemd/system/3proxy.servicew
+w
+
+
 systemctl daemon-reload && systemctl enable  --now 3proxy && systemctl start 3proxy
 ifcmd
 IP=`curl -sL -4 ip.sb`
