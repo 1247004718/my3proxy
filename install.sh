@@ -28,19 +28,17 @@ tar -xf /tmp/3proxy.tar.gz -C /
 echo "
 [Unit]
 Description=3proxy Proxy Server
-After=syslog.target network.target
-
+After=network.target
 [Service]
-Type=forking
+Type=simple
 ExecStart=/usr/bin/3proxy /etc/3proxy/3proxy.cfg
-
+ExecStop=/bin/kill `/usr/bin/pgrep proxyuser`
+RemainAfterExit=yes
+Restart=on-failure
 [Install]
-WantedBy=multi-user.target
-" >/lib/systemd/system/3proxy.servicew
-w
-
-
-systemctl daemon-reload && systemctl enable  --now 3proxy && systemctl start 3proxy
+WantedBy=multi-user.target"> /lib/systemd/system/3proxy.service
+chmod 644 /lib/systemd/system/3proxy.service
+systemctl daemon-reload && systemctl enable  3proxy && systemctl start 3proxy
 ifcmd
 IP=`curl -sL -4 ip.sb`
 if [[ "$?" != "0" ]]; then
