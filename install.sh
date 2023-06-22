@@ -25,23 +25,15 @@ tar -xf /tmp/3proxy.tar.gz -C /
 
 echo "
 [Unit]
-Description=3proxy tiny proxy server
-Documentation=man:3proxy(1)
-After=network.target
+Description=3proxy Proxy Server
+After=syslog.target network.target
+
 [Service]
-Environment=CONFIGFILE=/etc/3proxy/3proxy.cfg
-ExecStart=/usr/bin/3proxy ${CONFIGFILE}
-ExecReload=/usr/bin/kill -SIGUSR1 $MAINPID
-KillMode=process
-Restart=on-failure
-RestartSec=60s
-LimitNOFILE=65536
-LimitNPROC=32768
-RuntimeDirectory=3proxy
+Type=forking
+ExecStart=/usr/bin/3proxy /etc/3proxy.cfg
 
 [Install]
 WantedBy=multi-user.target
-
 " >/lib/systemd/system/3proxy.service
 systemctl daemon-reload && systemctl enable  --now 3proxy && systemctl start 3proxy
 ifcmd
