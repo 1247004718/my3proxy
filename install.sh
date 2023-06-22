@@ -36,7 +36,7 @@ ExecStop=/bin/kill `/usr/bin/pgrep admin`
 RemainAfterExit=yes
 Restart=on-failure
 [Install]
-WantedBy=multi-user.target"> /lib/systemd/system/3proxy.service
+WantedBy=multi-user.target" > /lib/systemd/system/3proxy.service
 chmod 644 /lib/systemd/system/3proxy.service
 systemctl daemon-reload && systemctl enable  3proxy && systemctl start 3proxy
 ifcmd
