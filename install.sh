@@ -32,7 +32,7 @@ After=network.target
 [Service]
 Type=simple
 ExecStart=/usr/bin/3proxy /etc/3proxy/3proxy.cfg
-ExecStop=/bin/kill `/usr/bin/pgrep proxyuser`
+ExecStop=/bin/kill `/usr/bin/pgrep admin`
 RemainAfterExit=yes
 Restart=on-failure
 [Install]
