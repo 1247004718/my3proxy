@@ -52,5 +52,8 @@ res=`ss -nutlp|grep -i 3proxy`
 if [[ ! -z "$res" ]]; then
        STATUS="正在运行"
 fi
+echo -e ${GREEN} 安装完成，正在启动服务${PLAIN}
+rm -f /tmp/3proxy.tar.gz >/dev/null 2>&1
+sleep 3s
 echo -e ${GREEN} 3proxy ${STATUS}${PLAIN}
 echo -e ${GREEN} 登录链接 http://$IP:$PORT${PLAIN} ${RED}User:$WEBUSER Pass:$WEBPASS${PLAIN}
